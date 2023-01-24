@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Adv-Js-404-01</title>
+
+    
+</head>
+<body>
+
+    <div>
+        <div class="massContainer">
+
+            <p>Please Enter Your Mass</p>
+            <input id="inputWeight" type="number">
+        </div>
+        <div class="planetContainer">
+
+            <p>Please Select One Planet </p>
+            <select name="selectPlanet" id="selectPlanet"></select>
+        </div>
+    </div>
+    <div class="button">
+        <button onclick="calcWeight()" id="button">Calculate Weight</button>
+    </div>
+    <div class="h1AndImgContainer">
+
+        <h1 id="h1"></h1>
+        <img id="image" src="" alt="">
+    </div>
+    
+    
+
+</body>
+
+<script>
+     
+     const planets =[
+        {planetName:"Sun", gravity: 27.9, image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1fucJsStAqiIE0elGGk9JDeEFXS5QN04PPITkfZiMkTIKQn9brQWML-qSDMxzLCSFyIQ&usqp=CAU "},
+        {planetName:"Moon", gravity: 0.1655, image: "https://assets.stickpng.com/images/580b585b2edbce24c47b270b.png" },
+        {planetName:"Mercury", gravity: 0.377, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Mercury_in_color_-_Prockter07_centered.jpg/640px-Mercury_in_color_-_Prockter07_centered.jpg" },
+        {planetName:"Venus", gravity: 0.9032, image: "https://cdn.mos.cms.futurecdn.net/RifjtkFLBEFgzkZqWEh69P.jpg"},
+        {planetName:"Earth", gravity: 1, image: "http://astronomy.com/~/media/1D9399EA7C744344AD428CC8D03B5730.jpg" },
+        {planetName:"Mars", gravity: 0.3895, image:"https://static.scientificamerican.com/sciam/cache/file/C454F5A6-536E-4C9F-AA6AF354BB85A85B.jpg" },
+        {planetName:"Jupiter", gravity: 2.640, image: "https://cdn.mos.cms.futurecdn.net/Mza6ccKYF6WVrqZekTtJxN.jpg"},
+        {planetName:"Saturn", gravity: 1.139, image: "https://starwalk.space/gallery/images/saturn-planet-guide/1920x1080.jpg"},
+        {planetName:"Uranus", gravity: 0.917, image: "https://ychef.files.bbci.co.uk/976x549/p0257vk5.jpg" },
+        {planetName:"Neptune", gravity: 1.148, image: "https://media.wired.com/photos/5d04045bde1abfe4e801d054/125:94/w_1595,h_1200,c_limit/Science-Neptune-FA-PIA01492_orig.jpg" },
+     ]
+      var image 
+     planets.map((ele)=>{
+
+        const options =document.createElement("option");
+        //  creating options
+
+        options.innerHTML=ele.planetName;
+        // creating planets in the dropdown
+
+        options.value=ele.gravity;
+        // putting value from corresponding planet's gravity to options
+
+        options.setAttribute("imageSrc" , ele.image)
+
+        const select =document.getElementById("selectPlanet");
+
+        select.appendChild(options)
+        // to add all planets one below other
+
+        // console.log("option",options);
+
+        const image =  ele.image
+        const img = document.createElement("img")
+        img.src=image
+        console.log(img);
+
+           
+
+     })
+
+
+     function calcWeight() {
+         
+         var mass = +document.getElementById("inputWeight").value
+        //  we have added + infront of documnet as to convert the value to number (as bydefault it is string i.e white color)
+
+        //  console.log(weight);  
+
+        console.log(image);
+         
+         const select = document.getElementById("selectPlanet")
+
+         var selectedIndex = select.selectedIndex;
+         console.log(selectedIndex);
+
+         const selectedOption = select.options[selectedIndex]
+         console.log(selectedOption);
+
+         const gravity = +selectedOption.value
+         console.log(gravity);
+
+         const weight = mass * gravity;
+         console.log(weight);
+
+         const img =document.getElementById("image")
+         var imgsrc =selectedOption.getAttribute("name")
+         img.src =imgsrc
+
+
+         const h1 = document.getElementById("h1")
+         const h2 = document.getElementById("h2")
+
+         var error1 = "Please Enter Your Mass ..!! "
+         var error2 = "Enter Valid Mass ..!! "
+         
+         if(mass == ""){
+             h2.innerText = error1
+            } 
+         else if( mass < 0){
+            h2.innerText = error2
+
+         }   
+        else {
+
+                h1.innerText = Math.abs(weight)
+                const img = document.getElementById("image")
+                var imgsrc = selectedOption.getAttribute("imageSrc")
+                img.src =imgsrc
+            }
+
+        
+
+     } 
+
+
+
+
+</script>
+
+
+</html>
